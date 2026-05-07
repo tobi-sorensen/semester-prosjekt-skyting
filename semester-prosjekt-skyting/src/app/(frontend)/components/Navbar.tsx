@@ -1,4 +1,5 @@
 import Link from "next/link";
+import UserStatus from './UserStatus';
 
 export default function Navbar() {
   return (
@@ -9,6 +10,7 @@ export default function Navbar() {
         <Link href="create">Opprett</Link>
         <Link href="archive">Arkiv</Link>
         <Link href="login">Logg inn</Link>
+        <UserStatus />
       </div>
     </nav>
   );

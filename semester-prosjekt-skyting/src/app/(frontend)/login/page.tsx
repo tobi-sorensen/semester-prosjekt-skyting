@@ -9,62 +9,91 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+
     setError('');
+    setLoading(true);
 
     try {
       const res = await fetch('/api/users/login', {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include',
         body: JSON.stringify({
           email,
           password,
         }),
       });
 
-      const data = await res.json();
+      let data: any = null;
 
-      if (!res.ok) {
-        throw new Error(data.errors?.[0]?.message || 'Login failed');
+      try {
+        data = await res.json();
+      } catch {
+        data = null;
       }
 
-      router.push('/');
+      if (!res.ok) {
+        throw new Error(
+          data?.errors?.[0]?.message ||
+            data?.message ||
+            'Kunne ikke logge inn',
+        );
+      }
+
+      router.replace('/');
       router.refresh();
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Noe gikk galt ved innlogging',
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="page">
-      <h2>Login</h2>
+    <main className="login-page">
+      <form onSubmit={handleLogin} className="login-card">
+        <h1>Logg inn</h1>
 
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <label>
+          E-post
+          <input
+            type="email"
+            placeholder="Heisannn@epost.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={loading}
+            required
+          />
+        </label>
 
-        <input
-          type="password"
-          placeholder="Passord"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <label>
+          Passord
+          <input
+            type="password"
+            placeholder="Passord"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            disabled={loading}
+            required
+          />
+        </label>
 
-        <button type="submit">Logg inn</button>
+        {error && <p className="login-error">{error}</p>}
+
+        <button type="submit" disabled={loading}>
+          {loading ? 'Logger inn...' : 'Logg inn'}
+        </button>
       </form>
-
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-    </div>
+    </main>
   );
 }

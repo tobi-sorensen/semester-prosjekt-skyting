@@ -24,7 +24,7 @@ export const Members: CollectionConfig = {
     {
       name: 'class',
       type: 'select',
-      options: ['Rekrutt', 'Junior', 'Senior', 'Veteran'],
+      options: ['A', 'B', 'F', 'D1'],
     },
   ],
 }

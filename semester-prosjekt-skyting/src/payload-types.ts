@@ -202,7 +202,7 @@ export interface Member {
   memberNumber?: number | null;
   name: string;
   club: number | Club;
-  class?: ('Rekrutt' | 'Junior' | 'Senior' | 'Veteran') | null;
+  class?: ('A' | 'B' | 'F' | 'D1') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -212,14 +212,27 @@ export interface Member {
  */
 export interface Result {
   id: number;
-  member: number | Member;
   event: number | Event;
+  shooterName: string;
+  team: number;
+  standplass: number;
+  startNumber: number;
+  class?: string | null;
   post1?: number | null;
+  inner1?: number | null;
   post2?: number | null;
+  inner2?: number | null;
   post3?: number | null;
+  inner3?: number | null;
   post4?: number | null;
+  inner4?: number | null;
   post5?: number | null;
-  total?: number | null;
+  inner5?: number | null;
+  post6?: number | null;
+  inner6?: number | null;
+  total: number;
+  sf1?: number | null;
+  sf2?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -392,14 +405,27 @@ export interface MembersSelect<T extends boolean = true> {
  * via the `definition` "results_select".
  */
 export interface ResultsSelect<T extends boolean = true> {
-  member?: T;
   event?: T;
+  shooterName?: T;
+  team?: T;
+  standplass?: T;
+  startNumber?: T;
+  class?: T;
   post1?: T;
+  inner1?: T;
   post2?: T;
+  inner2?: T;
   post3?: T;
+  inner3?: T;
   post4?: T;
+  inner4?: T;
   post5?: T;
+  inner5?: T;
+  post6?: T;
+  inner6?: T;
   total?: T;
+  sf1?: T;
+  sf2?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -7,8 +7,8 @@ export default function Navbar() {
       <h1>Jaktfelt</h1>
       <div className="links">
         <Link href="/">Hjem</Link>
-        <Link href="create">Opprett</Link>
-        <Link href="archive">Arkiv</Link>
+        <Link href="/create">Opprett</Link>
+        <Link href="/archive">Arkiv</Link>
         <Link href="login">Logg inn</Link>
         <UserStatus />
       </div>

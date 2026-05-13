@@ -3,15 +3,15 @@ import { CollectionConfig } from 'payload'
 export const Results: CollectionConfig = {
   slug: 'results',
   admin: {
-    useAsTitle: 'id',
+    useAsTitle: 'shooterName',
+  },
+  access: {
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
   },
   fields: [
-    {
-      name: 'member',
-      type: 'relationship',
-      relationTo: 'members' as any,
-      required: true,
-    },
     {
       name: 'event',
       type: 'relationship',
@@ -19,28 +19,62 @@ export const Results: CollectionConfig = {
       required: true,
     },
     {
-      name: 'post1',
-      type: 'number',
+      name: 'shooterName',
+      type: 'text',
+      required: true,
     },
     {
-      name: 'post2',
+      name: 'team',
       type: 'number',
+      required: true,
     },
     {
-      name: 'post3',
+      name: 'standplass',
       type: 'number',
+      required: true,
     },
     {
-      name: 'post4',
+      name: 'startNumber',
       type: 'number',
+      required: true,
     },
     {
-      name: 'post5',
-      type: 'number',
+      name: 'class',
+      type: 'text',
     },
+
+    { name: 'post1', type: 'number', defaultValue: 0 },
+    { name: 'inner1', type: 'number', defaultValue: 0 },
+
+    { name: 'post2', type: 'number', defaultValue: 0 },
+    { name: 'inner2', type: 'number', defaultValue: 0 },
+
+    { name: 'post3', type: 'number', defaultValue: 0 },
+    { name: 'inner3', type: 'number', defaultValue: 0 },
+
+    { name: 'post4', type: 'number', defaultValue: 0 },
+    { name: 'inner4', type: 'number', defaultValue: 0 },
+
+    { name: 'post5', type: 'number', defaultValue: 0 },
+    { name: 'inner5', type: 'number', defaultValue: 0 },
+
+    { name: 'post6', type: 'number', defaultValue: 0 },
+    { name: 'inner6', type: 'number', defaultValue: 0 },
+
     {
       name: 'total',
       type: 'number',
+      required: true,
+    },
+    {
+      name: 'sf1',
+      type: 'number',
+      defaultValue: 0,
+    },
+    {
+      name: 'sf2',
+      type: 'number',
+      defaultValue: 0,
     },
   ],
 }
